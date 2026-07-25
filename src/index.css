@@ -158,6 +158,18 @@ body {
   gap: 2.4rem;
 }
 
+.btn-add {
+  background-color: #212529;
+  color: #dee2e6;
+  border: none;
+  border-radius: 10rem;
+  font-size: 1.4rem;
+  padding: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
 @media (max-width: 720px) {
   .main {
     flex-direction: column;

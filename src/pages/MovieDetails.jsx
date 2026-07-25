@@ -1,0 +1,68 @@
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+import useFetchMovieDetails from "../hooks/useFetchMovieDetails";
+import StarRating from "../components/StarRating";
+import useWatchedMovies from "../hooks/useWatchedMovies";
+
+function MovieDetails() {
+  const [userRating, setUserRating] = useState("");
+  const { movieId } = useParams();
+  const { movie, loading, error } = useFetchMovieDetails(movieId);
+  const { watched, addWatched, removeWatched, isWatched } = useWatchedMovies();
+
+  if (loading) {
+    return <p>Loading movie details...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!movie) {
+    return <p>Movie not found.</p>;
+  }
+
+  const { Title, Year, Runtime, Genre, Actors, Poster, Plot } = movie;
+
+  return (
+    <>
+      <div className="movie-details-page">
+        <p className="movie-details-eyebrow">Movie Id: {movieId}</p>
+        <div className="details">
+          <img
+            className="details-poster"
+            src={Poster}
+            alt={`${Title} poster`}
+          />
+          <section className="details-content">
+            <h1>{Title}</h1>
+            <div className="details-meta">
+              <span>{Year}</span>
+              <span>{Runtime}</span>
+              <span>{Genre}</span>
+            </div>
+            <div className="details-section">
+              <h2>Starring</h2>
+              <p>{Actors}</p>
+            </div>
+            <div className="details-section">
+              <h2>Plot</h2>
+              <p>{Plot}</p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section>
+        <div className="rating">
+          <StarRating onSetMovieRating={setUserRating} />
+        </div>
+        <div>
+          <button onClick={() => addWatched(movie)}>Add to watched</button>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default MovieDetails;

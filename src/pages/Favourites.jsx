@@ -1,7 +1,16 @@
+import FavouritesList from "../components/FavouritesList";
+import useFavouriteMovies from "../hooks/useFavouriteMovies";
+
 function Favourites() {
+  const { favourites, removeFavourite } = useFavouriteMovies();
+
   return (
-    <div>
-      <p>Hello You</p>
+    <div className="main">
+      Favourites
+      <FavouritesList
+        favourites={favourites}
+        onRemoveFavourite={removeFavourite}
+      />
     </div>
   );
 }

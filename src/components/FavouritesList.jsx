@@ -1,23 +1,20 @@
 import MovieCard from "./MovieCard";
 
-function WatchedList({ watched, onRemoveWatched }) {
+function FavouritesList({ favourites, onRemoveFavourite }) {
   return (
     <div className="movie-grid">
-      {watched.map((movie) => (
+      {favourites.map((movie) => (
         <MovieCard movie={movie} key={movie.id}>
           <button
             className="btn-delete"
-            onClick={() => onRemoveWatched(movie.id)}
+            onClick={() => onRemoveFavourite(movie.id)}
           >
             X
           </button>
-          <p>
-            Your rating {movie.userRating} <span>⭐️</span>
-          </p>
         </MovieCard>
       ))}
     </div>
   );
 }
 
-export default WatchedList;
+export default FavouritesList;

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import staticMovies from "../data/movies";
 
 const KEY = "5eb573aa";
 const MIN_SEARCH_LENGTH = 3;
 
 function useFetchMovies(search) {
-  const [movies, setMovies] = useState(staticMovies);
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const query = search.trim();
@@ -72,7 +71,7 @@ function useFetchMovies(search) {
   }, [query, shouldFetch]);
 
   return {
-    movies: shouldFetch ? movies : staticMovies,
+    movies: shouldFetch ? movies : [],
     loading: shouldFetch ? loading : false,
     error: shouldFetch ? error : null,
   };

@@ -18,7 +18,12 @@ function HomePage() {
       <Header search={search} setSearch={setSearch} />
       <MainBody>
         <NavBar />
-        <Box movies={filteredMovies} loading={loading} error={error} />
+        <Box
+          movies={filteredMovies}
+          loading={loading}
+          error={error}
+          search={search}
+        />
       </MainBody>
     </div>
   );

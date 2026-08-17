@@ -21,8 +21,8 @@ function MovieCard({ movie, children }) {
           </p>
           <p>{movie.description}</p>
           <Link to={`/movie/${movie.id}`}>View details</Link>
+          {children && <div className="movie-card-actions">{children}</div>}
         </div>
-        {children}
       </article>
     </div>
   );

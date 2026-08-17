@@ -3,12 +3,14 @@ import { useParams } from "react-router-dom";
 import useFetchMovieDetails from "../hooks/useFetchMovieDetails";
 import StarRating from "../components/StarRating";
 import useWatchedMovies from "../hooks/useWatchedMovies";
+import useFavouriteMovies from "../hooks/useFavouriteMovies";
 
 function MovieDetails() {
   const [userRating, setUserRating] = useState("");
   const { movieId } = useParams();
   const { movie, loading, error } = useFetchMovieDetails(movieId);
   const { addWatched, isWatched } = useWatchedMovies();
+  const { addFavourite, isFavourite } = useFavouriteMovies();
 
   if (loading) {
     return <p>Loading movie details...</p>;
@@ -24,6 +26,7 @@ function MovieDetails() {
 
   const { Title, Year, Runtime, Genre, Actors, Poster, Plot } = movie;
   const alreadyRated = isWatched(movieId);
+  const alreadyFavourite = isFavourite(movieId);
   const hasUserRating = userRating > 0;
 
   return (
@@ -53,6 +56,13 @@ function MovieDetails() {
               <h2>Plot</h2>
               <p>{Plot}</p>
             </div>
+            <button
+              className="btn-add"
+              disabled={alreadyFavourite}
+              onClick={() => addFavourite(movie)}
+            >
+              {alreadyFavourite ? "Added to favourites" : "Add to favourites"}
+            </button>
           </section>
         </div>
       </div>

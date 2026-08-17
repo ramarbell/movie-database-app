@@ -29,7 +29,6 @@ function MovieDetails() {
   return (
     <>
       <div className="movie-details-page">
-        <p className="movie-details-eyebrow">Movie Id: {movieId}</p>
         <div className="details">
           <img
             className="details-poster"

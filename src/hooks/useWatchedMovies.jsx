@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const FALLBACK_POSTER = "/icons.svg";
+
 function useWatchedMovies() {
   const [watched, setWatched] = useState(() => {
     const storedValue = localStorage.getItem("watched");
@@ -20,7 +22,10 @@ function useWatchedMovies() {
         genre: movie.Genre,
         runtime: movie.Runtime,
         rating: movie.imdbRating,
-        poster: movie.Poster,
+        poster:
+          movie.Poster && movie.Poster !== "N/A"
+            ? movie.Poster
+            : FALLBACK_POSTER,
         description: movie.Plot,
         userRating: userRating,
       };

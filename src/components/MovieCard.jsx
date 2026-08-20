@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
+import MoviePoster from "./MoviePoster";
 
 function MovieCard({ movie, children }) {
   return (
     <div>
       <article className="movie-card">
-        <img
-          src={movie.poster}
-          alt={`${movie.title} poster`}
-          onError={(event) => {
-            event.currentTarget.src = "/icons.svg";
-          }}
-        />
+        <MoviePoster src={movie.poster} alt={`${movie.title} poster`} />
         <div className="movie-card-content">
           <div className="movie-card-title">
             <h3>{movie.title}</h3>

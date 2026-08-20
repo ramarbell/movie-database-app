@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const FALLBACK_POSTER = "/icons.svg";
+
 function useFavouriteMovies() {
   const [favourites, setFavourites] = useState(() => {
     const storedValue = localStorage.getItem("favourites");
@@ -25,7 +27,10 @@ function useFavouriteMovies() {
         genre: movie.Genre,
         runtime: movie.Runtime,
         rating: movie.imdbRating,
-        poster: movie.Poster,
+        poster:
+          movie.Poster && movie.Poster !== "N/A"
+            ? movie.Poster
+            : FALLBACK_POSTER,
         description: movie.Plot,
       };
 

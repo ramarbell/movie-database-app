@@ -4,6 +4,7 @@ import useFetchMovieDetails from "../hooks/useFetchMovieDetails";
 import StarRating from "../components/StarRating";
 import useWatchedMovies from "../hooks/useWatchedMovies";
 import useFavouriteMovies from "../hooks/useFavouriteMovies";
+import MoviePoster from "../components/MoviePoster";
 
 function MovieDetails() {
   const [userRating, setUserRating] = useState("");
@@ -33,13 +34,10 @@ function MovieDetails() {
     <>
       <div className="movie-details-page">
         <div className="details">
-          <img
+          <MoviePoster
             className="details-poster"
             src={Poster}
             alt={`${Title} poster`}
-            onError={(event) => {
-              event.currentTarget.src = "/icons.svg";
-            }}
           />
           <section className="details-content">
             <h1>{Title}</h1>

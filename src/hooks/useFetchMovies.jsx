@@ -2,13 +2,29 @@ import { useState, useEffect } from "react";
 
 const KEY = "5eb573aa";
 const MIN_SEARCH_LENGTH = 3;
+const SEARCH_CACHE_KEY = "movie-search-results";
+
+function getSearchCache() {
+  const cachedValue = sessionStorage.getItem(SEARCH_CACHE_KEY);
+  return cachedValue ? JSON.parse(cachedValue) : {};
+}
+
+function getCachedMovies(query) {
+  return getSearchCache()[query] || [];
+}
+
+function cacheMovies(query, movies) {
+  const cache = getSearchCache();
+  cache[query] = movies;
+  sessionStorage.setItem(SEARCH_CACHE_KEY, JSON.stringify(cache));
+}
 
 function useFetchMovies(search) {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const query = search.trim();
   const shouldFetch = query.length >= MIN_SEARCH_LENGTH;
+  const [movies, setMovies] = useState(() => getCachedMovies(query));
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -18,7 +34,13 @@ function useFetchMovies(search) {
     }
 
     async function fetchMovies() {
-      setLoading(true);
+      const cachedMovies = getCachedMovies(query);
+
+      if (cachedMovies.length > 0) {
+        setMovies(cachedMovies);
+      }
+
+      setLoading(cachedMovies.length === 0);
       setError(null);
 
       try {
@@ -52,6 +74,7 @@ function useFetchMovies(search) {
             }))
           : [];
 
+        cacheMovies(query, movies);
         setMovies(movies);
       } catch (error) {
         if (error.name !== "AbortError") {

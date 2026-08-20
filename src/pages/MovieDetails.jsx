@@ -5,6 +5,7 @@ import StarRating from "../components/StarRating";
 import useWatchedMovies from "../hooks/useWatchedMovies";
 import useFavouriteMovies from "../hooks/useFavouriteMovies";
 import MoviePoster from "../components/MoviePoster";
+import BackButton from "../components/BackButton";
 
 function MovieDetails() {
   const [userRating, setUserRating] = useState("");
@@ -33,6 +34,7 @@ function MovieDetails() {
   return (
     <>
       <div className="movie-details-page">
+        <BackButton />
         <div className="details">
           <MoviePoster
             className="details-poster"

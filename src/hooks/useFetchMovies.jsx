@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const KEY = "5eb573aa";
+const KEY = import.meta.env.VITE_OMDB_API_KEY;
 const MIN_SEARCH_LENGTH = 3;
 const SEARCH_CACHE_KEY = "movie-search-results";
 

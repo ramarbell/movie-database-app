@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import Favourites from "./pages/Favourites";
 import MovieDetails from "./pages/MovieDetails";
 import Watched from "./pages/Watched";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/movie/:movieId" element={<MovieDetails />} />
         <Route path="/watched" element={<Watched />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

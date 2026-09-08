@@ -4,7 +4,7 @@ A responsive React movie database that allows users to search for movies, view d
 
 ## Live Demo
 
-[View the Live Demo] (https://ramarbell.github.io/movie-database-app/)
+[View the Live Demo](https://ramarbell.github.io/movie-database-app/)
 
 ## Screenshot
 
